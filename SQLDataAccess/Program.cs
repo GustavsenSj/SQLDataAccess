@@ -14,6 +14,10 @@ PrintCustomer(connectionString);
 Console.WriteLine("-----------\n Find by Id \n-------------");
 FindAndPrintCustomerById(1, connectionString);
 
+
+Console.WriteLine("-----------\n Find by Name \n-------------");
+PrintCustomerByName(connectionString, "Bj");
+
 return;
 
 static string GetConnectionString()
@@ -37,6 +41,27 @@ static void PrintCustomer(string connectionString)
     try
     {
         List<Customer> customers = customerService.GetAllCustomers();
+
+        foreach (var customer in customers)
+        {
+            Console.WriteLine(
+                $"Customer ID: {customer.CustomerId}, Name: {customer.FirstName} {customer.LastName}, Postal: {customer.PostalCode}, Phone: {customer.Phone}, Email: {customer.Email} ");
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"An error occurred: {ex.Message}");
+    }
+}
+
+static void PrintCustomerByName(string connectionString, string name)
+{
+    DatabaseConnection dbConnection = new DatabaseConnection(connectionString);
+    var customerRepository = new CustomerRepository(dbConnection);
+    var customerService = new CustomerService(customerRepository);
+    try
+    {
+        List<Customer> customers = customerService.GetAllCustomersByName(name);
 
         foreach (var customer in customers)
         {

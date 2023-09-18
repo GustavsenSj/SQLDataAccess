@@ -81,11 +81,11 @@ public class CustomerRepository
 
         using (SqlConnection connection = _dbConnection.GetConnection())
         {
-            string query = "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer";
-
-
+            string query = @"SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer WHERE CONCAT(FirstName, ' ', LastName) LIKE @name";
+            
             using (SqlCommand command = new SqlCommand(query, connection))
             {
+                command.Parameters.AddWithValue("@name", "%" + name + "%");
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())

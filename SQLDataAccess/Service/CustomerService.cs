@@ -28,4 +28,9 @@ public class CustomerService
         return customer;
 
     }
+
+    public List<Customer> GetAllCustomersByName(string name)
+    {
+        return _customerRepository.GetAllCustomersByName(name);
+    }
 }
