@@ -2,6 +2,7 @@
 using SQLDataAccess.Repositories;
 
 namespace SQLDataAccess.Service;
+
 public class CustomerService
 {
     private readonly CustomerRepository _customerRepository;
@@ -26,7 +27,6 @@ public class CustomerService
         }
 
         return customer;
-
     }
 
     public List<Customer> GetAllCustomersByName(string name)
@@ -57,5 +57,16 @@ public class CustomerService
     public List<CustomerSpender> GetTopXHighestSpenders(int count)
     {
         return _customerRepository.GetTopXHighestSpenders(count);
+    }
+
+    public CustomerGenre GetTopGenreOfCustomerWithId(int id)
+    {
+        CustomerGenre? customerGenre = _customerRepository.GetTopGenreOfCustomerWithId(id);
+        if (customerGenre == null)
+        {
+            throw new InvalidOperationException("No tracks or customer found with Id: " + id);
+        }
+
+        return customerGenre;
     }
 }

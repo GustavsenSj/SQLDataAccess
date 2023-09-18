@@ -49,9 +49,12 @@ string connectionString = GetConnectionString();
 // Console.WriteLine("-----------\n Customer count by country \n-------------");
 // PrintCustomerCountByCountry(connectionString);
 
-Console.WriteLine("-----------\n Top X spending customers \n-------------");
-PrintTopXSpendingCustomers(connectionString, 10);
+// Console.WriteLine("-----------\n Top X spending customers \n-------------");
+// PrintTopXSpendingCustomers(connectionString, 10);
 
+
+Console.WriteLine("-----------\n Top Genre of customers \n-------------");
+PrintTopGenreOfCustomerWithId(connectionString,22);
 return;
 
 static string GetConnectionString()
@@ -192,8 +195,20 @@ static void PrintTopXSpendingCustomers(string connectionString, int count)
 
     List<CustomerSpender> topSpenders = customerService.GetTopXHighestSpenders(count);
 
-    foreach (var spender in topSpenders )
+    foreach (var spender in topSpenders)
     {
-        Console.WriteLine($"Id: {spender.CustomerId}, Name: {spender.FirstName} {spender.LastName}, Total spending: {spender.TotalSpent} ");
+        Console.WriteLine(
+            $"Id: {spender.CustomerId}, Name: {spender.FirstName} {spender.LastName}, Total spending: {spender.TotalSpent} ");
     }
+}
+
+static void PrintTopGenreOfCustomerWithId(string connectionString, int id)
+{
+    DatabaseConnection dbConnection = new DatabaseConnection(connectionString);
+    var customerRepository = new CustomerRepository(dbConnection);
+    var customerService = new CustomerService(customerRepository);
+
+    CustomerGenre customerGenre = customerService.GetTopGenreOfCustomerWithId(id);
+
+    Console.WriteLine($"Name: {customerGenre.CustomerName}, Top genre: {customerGenre.GenreName}, Number of tracks: {customerGenre.TrackCount}");
 }
