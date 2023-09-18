@@ -1,20 +1,22 @@
-﻿
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using SQLDataAccess.DB;
 using SQLDataAccess.Models;
 using SQLDataAccess.Repositories;
 using SQLDataAccess.Service;
 
 // Set up connections 
-DatabaseConnection dbConnection = new DatabaseConnection(GetConnectionString());
-var customerRepository = new CustomerRepository(dbConnection);
-var customerService = new CustomerService(customerRepository);
+string connectionString = GetConnectionString();
 
 //call functions
+Console.WriteLine("All customers \n----------------");
+PrintCustomer(connectionString);
 
-PrintCustomer();
+Console.WriteLine("-----------\n Find by Id \n-------------");
+FindAndPrintCustomerById(1, connectionString);
 
-string GetConnectionString()
+return;
+
+static string GetConnectionString()
 {
     SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder
     {
@@ -27,13 +29,40 @@ string GetConnectionString()
 }
 
 
-void PrintCustomer()
+static void PrintCustomer(string connectionString)
 {
-    List<Customer> customers = customerService.GetAllCustomers();
-
-    foreach (var customer in customers)
+    DatabaseConnection dbConnection = new DatabaseConnection(connectionString);
+    var customerRepository = new CustomerRepository(dbConnection);
+    var customerService = new CustomerService(customerRepository);
+    try
     {
-        Console.WriteLine($"Customer ID: {customer.CustomerId}, Name: {customer.FirstName} {customer.LastName}, Postal: {customer.PostalCode}, Phone: {customer.Phone}, Email: {customer.Email} ");
+        List<Customer> customers = customerService.GetAllCustomers();
+
+        foreach (var customer in customers)
+        {
+            Console.WriteLine(
+                $"Customer ID: {customer.CustomerId}, Name: {customer.FirstName} {customer.LastName}, Postal: {customer.PostalCode}, Phone: {customer.Phone}, Email: {customer.Email} ");
+        }
     }
-    
+    catch (Exception ex)
+    {
+        Console.WriteLine($"An error occurred: {ex.Message}");
+    }
+}
+
+static void FindAndPrintCustomerById(int id, string connectionString)
+{
+    DatabaseConnection dbConnection = new DatabaseConnection(connectionString);
+    var customerRepository = new CustomerRepository(dbConnection);
+    var customerService = new CustomerService(customerRepository);
+    try
+    {
+        Customer customer = customerService.GetCustomerById(id);
+        Console.WriteLine(
+            $"Customer ID: {customer.CustomerId}, Name: {customer.FirstName} {customer.LastName}, Postal: {customer.PostalCode}, Phone: {customer.Phone}, Email: {customer.Email} ");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"An error occurred: {ex.Message}");
+    }
 }

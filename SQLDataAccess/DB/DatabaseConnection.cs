@@ -14,7 +14,7 @@ public class DatabaseConnection : IDisposable
 
     public SqlConnection GetConnection()
     {
-        if (_connection.State != ConnectionState.Open)
+        if (_connection.State == ConnectionState.Closed)
         {
             _connection.Open();
         }
@@ -31,3 +31,4 @@ public class DatabaseConnection : IDisposable
         _connection.Dispose();
     }
 }
+

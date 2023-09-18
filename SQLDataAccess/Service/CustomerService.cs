@@ -16,5 +16,16 @@ public class CustomerService
         return _customerRepository.GetAllCustomers();
     }
 
-    // Add other methods for business logic related to customers
+    public Customer GetCustomerById(int id)
+    {
+        Customer? customer = _customerRepository.GetCustomerById(id);
+
+        if (customer == null)
+        {
+            throw new InvalidOperationException("Customer not found by ID: " + id);
+        }
+
+        return customer;
+
+    }
 }
