@@ -8,31 +8,46 @@ using SQLDataAccess.Service;
 string connectionString = GetConnectionString();
 
 //call functions
-Console.WriteLine("All customers \n----------------");
-PrintCustomer(connectionString);
+// Console.WriteLine("All customers \n----------------");
+// PrintCustomer(connectionString);
+//
+// Console.WriteLine("-----------\n Find by Id \n-------------");
+// FindAndPrintCustomerById(1, connectionString);
+//
+//
+// Console.WriteLine("-----------\n Find by Name \n-------------");
+// PrintCustomerByName(connectionString, "Bj");
+//
+//
+// Console.WriteLine("-----------\n Get with limit and offset \n-------------");
+// PrintCustomerWithOffset(connectionString, 10, 5);
+//
+//
+// Console.WriteLine("-----------\n Add customer \n-------------");
+// TryToAddCustomer(connectionString, new Customer()
+// {
+//     FirstName = "Sjur",
+//     LastName = "Gustavsen",
+//     Country = "Norway",
+//     PostalCode = "0087",
+//     Phone = "54888548",
+//     Email = "mail@CoolMail.com"
+// });
 
-Console.WriteLine("-----------\n Find by Id \n-------------");
-FindAndPrintCustomerById(1, connectionString);
+// Console.WriteLine("-----------\n Update customer \n-------------");
+// TryToUpdateCustomer(connectionString, 60, new Customer()
+// {
+//     FirstName = "Sjur Updated",
+//     LastName = "Gustavsen",
+//     Country = "Norway",
+//     PostalCode = "0087",
+//     Phone = "54888548",
+//     Email = "mail@CoolMail.com"
+// });
 
 
-Console.WriteLine("-----------\n Find by Name \n-------------");
-PrintCustomerByName(connectionString, "Bj");
-
-
-Console.WriteLine("-----------\n Get with limit and offset \n-------------");
-PrintCustomerWithOffset(connectionString, 10, 5);
-
-
-Console.WriteLine("-----------\n Add customer \n-------------");
-TryToAddCustomer(connectionString, new Customer()
-{
-    FirstName = "Sjur",
-    LastName = "Gustavsen",
-    Country = "Norway",
-    PostalCode = "0087",
-    Phone = "54888548",
-    Email = "mail@CoolMail.com"
-});
+Console.WriteLine("-----------\n Customer count by country \n-------------");
+PrintCustomerCountByCountry(connectionString);
 
 return;
 
@@ -138,4 +153,29 @@ static void TryToAddCustomer(string connectionString, Customer customer)
     bool success = customerService.AddCustomer(customer);
 
     Console.WriteLine($"Added customer: {success}");
+}
+
+static void TryToUpdateCustomer(string connectionString, int id, Customer customer)
+{
+    DatabaseConnection dbConnection = new DatabaseConnection(connectionString);
+    var customerRepository = new CustomerRepository(dbConnection);
+    var customerService = new CustomerService(customerRepository);
+
+    bool success = customerService.UpdateCustomerWithId(id, customer);
+
+    Console.WriteLine($"Update customer: {success}");
+}
+
+static void PrintCustomerCountByCountry(string connectionString)
+{
+    DatabaseConnection dbConnection = new DatabaseConnection(connectionString);
+    var customerRepository = new CustomerRepository(dbConnection);
+    var customerService = new CustomerService(customerRepository);
+
+    List<CustomerCountry> customerCountry = customerService.GetCustomersCountByCountry();
+
+    foreach (var country in customerCountry)
+    {
+        Console.WriteLine($"Country: {country.Country}, Count: {country.Count} ");
+    }
 }

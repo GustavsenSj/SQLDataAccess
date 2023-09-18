@@ -43,4 +43,14 @@ public class CustomerService
     {
         return _customerRepository.AddCustomer(customer);
     }
+
+    public bool UpdateCustomerWithId(int id, Customer customer)
+    {
+        return _customerRepository.UpdateCustomerWithId(id, customer);
+    }
+
+    public List<CustomerCountry> GetCustomersCountByCountry()
+    {
+        return _customerRepository.GetCustomersCountByCountry();
+    }
 }

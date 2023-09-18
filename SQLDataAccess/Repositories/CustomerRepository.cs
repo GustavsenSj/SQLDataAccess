@@ -82,7 +82,7 @@ public class CustomerRepository
         using (SqlConnection connection = _dbConnection.GetConnection())
         {
             string query =
-                @"SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer WHERE CONCAT(FirstName, ' ', LastName) LIKE @name";
+                "SELECT CustomerId, FirstName, LastName, Country, PostalCode, Phone, Email FROM Customer WHERE CONCAT(FirstName, ' ', LastName) LIKE @name";
 
             using (SqlCommand command = new SqlCommand(query, connection))
             {
@@ -167,5 +167,59 @@ public class CustomerRepository
         }
 
         return success;
+    }
+
+    public bool UpdateCustomerWithId(int id, Customer customer)
+    {
+        bool success;
+        string query =
+            @"UPDATE Customer SET FirstName = @FirstName,  LastName = @LastName,  Country = @Country,  PostalCode = @PostalCode,  Phone = @Phone,  Email = @Email WHERE CustomerId = @CustomerId;";
+
+        using (SqlConnection connection = _dbConnection.GetConnection())
+        {
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@FirstName", customer.FirstName);
+                command.Parameters.AddWithValue("@LastName", customer.LastName);
+                command.Parameters.AddWithValue("@Country", customer.Country);
+                command.Parameters.AddWithValue("@PostalCode", customer.PostalCode);
+                command.Parameters.AddWithValue("@Phone", customer.Phone);
+                command.Parameters.AddWithValue("@Email", customer.Email);
+                ;
+                command.Parameters.AddWithValue("@CustomerId", id);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                success = rowsAffected > 0;
+            }
+        }
+
+        return success;
+    }
+
+    public List<CustomerCountry> GetCustomersCountByCountry()
+    {
+        List<CustomerCountry> customerCountry = new List<CustomerCountry>();
+        using (SqlConnection connection = _dbConnection.GetConnection())
+        {
+            string query =
+                @" SELECT Country, COUNT(CustomerId) AS NumberOfCustomers FROM Customer GROUP BY Country ORDER BY NumberOfCustomers DESC;";
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        customerCountry.Add( new CustomerCountry
+                        {
+                            Country = reader["Country"].ToString(),
+                            Count = Convert.ToInt32(reader["NumberOfCustomers"])
+                        });
+                    }
+                }
+            }
+        }
+
+        return customerCountry;
     }
 }
