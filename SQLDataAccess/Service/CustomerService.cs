@@ -53,4 +53,9 @@ public class CustomerService
     {
         return _customerRepository.GetCustomersCountByCountry();
     }
+
+    public List<CustomerSpender> GetTopXHighestSpenders(int count)
+    {
+        return _customerRepository.GetTopXHighestSpenders(count);
+    }
 }

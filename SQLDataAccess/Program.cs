@@ -46,8 +46,11 @@ string connectionString = GetConnectionString();
 // });
 
 
-Console.WriteLine("-----------\n Customer count by country \n-------------");
-PrintCustomerCountByCountry(connectionString);
+// Console.WriteLine("-----------\n Customer count by country \n-------------");
+// PrintCustomerCountByCountry(connectionString);
+
+Console.WriteLine("-----------\n Top X spending customers \n-------------");
+PrintTopXSpendingCustomers(connectionString, 10);
 
 return;
 
@@ -177,5 +180,20 @@ static void PrintCustomerCountByCountry(string connectionString)
     foreach (var country in customerCountry)
     {
         Console.WriteLine($"Country: {country.Country}, Count: {country.Count} ");
+    }
+}
+
+static void PrintTopXSpendingCustomers(string connectionString, int count)
+{
+    DatabaseConnection dbConnection = new DatabaseConnection(connectionString);
+    var customerRepository = new CustomerRepository(dbConnection);
+    var customerService = new CustomerService(customerRepository);
+
+
+    List<CustomerSpender> topSpenders = customerService.GetTopXHighestSpenders(count);
+
+    foreach (var spender in topSpenders )
+    {
+        Console.WriteLine($"Id: {spender.CustomerId}, Name: {spender.FirstName} {spender.LastName}, Total spending: {spender.TotalSpent} ");
     }
 }
