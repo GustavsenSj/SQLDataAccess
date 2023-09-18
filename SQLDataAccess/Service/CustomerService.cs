@@ -33,4 +33,9 @@ public class CustomerService
     {
         return _customerRepository.GetAllCustomersByName(name);
     }
+
+    public List<Customer> GetCustomerInRange(int limit, int offset)
+    {
+        return _customerRepository.GetCustomerInRange(limit, offset);
+    }
 }
