@@ -22,6 +22,18 @@ PrintCustomerByName(connectionString, "Bj");
 Console.WriteLine("-----------\n Get with limit and offset \n-------------");
 PrintCustomerWithOffset(connectionString, 10, 5);
 
+
+Console.WriteLine("-----------\n Add customer \n-------------");
+TryToAddCustomer(connectionString, new Customer()
+{
+    FirstName = "Sjur",
+    LastName = "Gustavsen",
+    Country = "Norway",
+    PostalCode = "0087",
+    Phone = "54888548",
+    Email = "mail@CoolMail.com"
+});
+
 return;
 
 static string GetConnectionString()
@@ -115,4 +127,15 @@ static void PrintCustomerWithOffset(string connectionString, int limit, int offs
     {
         Console.WriteLine($"An error occurred: {ex.Message}");
     }
+}
+
+static void TryToAddCustomer(string connectionString, Customer customer)
+{
+    DatabaseConnection dbConnection = new DatabaseConnection(connectionString);
+    var customerRepository = new CustomerRepository(dbConnection);
+    var customerService = new CustomerService(customerRepository);
+
+    bool success = customerService.AddCustomer(customer);
+
+    Console.WriteLine($"Added customer: {success}");
 }

@@ -38,4 +38,9 @@ public class CustomerService
     {
         return _customerRepository.GetCustomerInRange(limit, offset);
     }
+
+    public bool AddCustomer(Customer customer)
+    {
+        return _customerRepository.AddCustomer(customer);
+    }
 }
