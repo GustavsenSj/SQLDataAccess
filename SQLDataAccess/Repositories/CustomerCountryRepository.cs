@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using Microsoft.Identity.Client;
 using SQLDataAccess.DB;
 using SQLDataAccess.Models;
 
@@ -39,7 +38,7 @@ public class CustomerCountryRepository
             {
                 customerCountry.Add(new CustomerCountry
                 {
-                    Country = reader["Country"].ToString(),
+                    Country = reader["Country"].ToString()!,
                     Count = Convert.ToInt32(reader["NumberOfCustomers"])
                 });
             }

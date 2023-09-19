@@ -41,8 +41,8 @@ public class CustomerRepository
                 customers.Add(new Customer
                 {
                     CustomerId = (int)reader["CustomerId"],
-                    FirstName = reader["FirstName"].ToString(),
-                    LastName = reader["LastName"].ToString(),
+                    FirstName = reader["FirstName"].ToString()!,
+                    LastName = reader["LastName"].ToString()!,
                     Country = reader["Country"].ToString(),
                     PostalCode = reader["PostalCode"].ToString(),
                     Phone = reader["Phone"].ToString(),
@@ -79,8 +79,8 @@ public class CustomerRepository
                 foundCustomer = new Customer
                 {
                     CustomerId = (int)reader["CustomerId"],
-                    FirstName = reader["FirstName"].ToString(),
-                    LastName = reader["LastName"].ToString(),
+                    FirstName = reader["FirstName"].ToString()!,
+                    LastName = reader["LastName"].ToString()!,
                     Country = reader["Country"].ToString(),
                     PostalCode = reader["PostalCode"].ToString(),
                     Phone = reader["Phone"].ToString(),
@@ -118,8 +118,8 @@ public class CustomerRepository
                 customers.Add(new Customer
                 {
                     CustomerId = (int)reader["CustomerId"],
-                    FirstName = reader["FirstName"].ToString(),
-                    LastName = reader["LastName"].ToString(),
+                    FirstName = reader["FirstName"].ToString()!,
+                    LastName = reader["LastName"].ToString()!,
                     Country = reader["Country"].ToString(),
                     PostalCode = reader["PostalCode"].ToString(),
                     Phone = reader["Phone"].ToString(),
@@ -160,8 +160,8 @@ public class CustomerRepository
                 customers.Add(new Customer
                 {
                     CustomerId = (int)reader["CustomerId"],
-                    FirstName = reader["FirstName"].ToString(),
-                    LastName = reader["LastName"].ToString(),
+                    FirstName = reader["FirstName"].ToString()!,
+                    LastName = reader["LastName"].ToString()!,
                     Country = reader["Country"].ToString(),
                     PostalCode = reader["PostalCode"].ToString(),
                     Phone = reader["Phone"].ToString(),
@@ -222,7 +222,7 @@ public class CustomerRepository
     /// <returns>True if the customer was successfully updated, otherwise false.</returns>
     public bool UpdateCustomerWithId(int id, Customer customer)
     {
-        bool success = false;
+        bool success;
         using SqlConnection connection = _dbConnection.GetConnection();
         const string query =
             @"UPDATE Customer SET FirstName = @FirstName,  LastName = @LastName,  Country = @Country,  PostalCode = @PostalCode,  Phone = @Phone,  Email = @Email WHERE CustomerId = @CustomerId;";

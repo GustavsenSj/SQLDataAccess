@@ -7,9 +7,9 @@
 public class CustomerGenre
 {
    public int CustomerId { get; set; }
-   public string CustomerName { get; set; }
+   public string CustomerName { get; set; }= null!;
    public int GenreId { get; set; }
-   public string GenreName { get; set; }
+   public string GenreName { get; set; }= null!;
    public int TrackCount { get; set; }
    
 }

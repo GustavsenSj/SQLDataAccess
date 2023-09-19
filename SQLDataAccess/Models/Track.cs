@@ -6,7 +6,7 @@
 public class Track
 {
    private int TrackId { get; set; } 
-   private string Name { get; set; }
+   private string Name { get; set; }= null!;
    private int AlbumId { get; set; }
    private int MediaTypeId { get; set; }
    private int GenreId { get; set; }

@@ -29,9 +29,9 @@ public class CustomerGenreRepository
     /// <returns>A <see cref="CustomerGenre"/> object representing the top genre of the customer. returns null if no customer is found</returns>
     public CustomerGenre? GetTopGenreOfCustomerWithId(int id)
     {
-        CustomerGenre customerGenre = null;
+        CustomerGenre? customerGenre = null;
         const string query =
-            " SELECT TOP 1 c.FirstName, c.LastName,c.CustomerId, t.GenreId, g.Name AS GenreName, COUNT(*) AS TrackCount FROM Customer c JOIN Invoice i ON c.CustomerId = i.CustomerId JOIN InvoiceLine il ON i.InvoiceId = il.InvoiceId JOIN Track t ON il.TrackId = t.TrackId JOIN Genre g ON t.GenreId = g.GenreId WHERE c.CustomerId = @id GROUP BY c.FirstName, c.LastName, c.CustomerId, t.GenreId, g.Name ORDER BY COUNT(*) DESC;";
+            " SELECT TOP 1 c.FirstName, c.LastName,c.CustomerId, t.GenreId, g.Name AS GenreName, COUNT(*) AS TrackCount FROM Customer c JOIN Invoice i ON c.CustomerId = i.CustomerId JOIN InvoiceLine il ON i.InvoiceId = il.InvoiceId JOIN [Track] t ON il.TrackId = t.TrackId JOIN Genre g ON t.GenreId = g.GenreId WHERE c.CustomerId = @id GROUP BY c.FirstName, c.LastName, c.CustomerId, t.GenreId, g.Name ORDER BY COUNT(*) DESC;";
         using SqlConnection connection = _dbConnection.GetConnection();
         try
         {
@@ -43,9 +43,9 @@ public class CustomerGenreRepository
                 customerGenre = (new CustomerGenre()
                 {
                     CustomerId = Convert.ToInt32(reader["CustomerId"]),
-                    CustomerName = reader["FirstName"].ToString() + reader["LastName"].ToString(),
+                    CustomerName = reader["FirstName"] + reader["LastName"].ToString(),
                     GenreId = Convert.ToInt32(reader["Genreid"]),
-                    GenreName = reader["GenreName"].ToString(),
+                    GenreName = reader["GenreName"].ToString()!,
                     TrackCount = Convert.ToInt32(reader["TrackCount"]),
                 });
             }

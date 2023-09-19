@@ -41,8 +41,8 @@ public class CustomerSpenderRepository
                 customers.Add(new CustomerSpender
                 {
                     CustomerId = Convert.ToInt32(reader["CustomerId"]),
-                    FirstName = reader["FirstName"].ToString(),
-                    LastName = reader["LastName"].ToString(),
+                    FirstName = reader["FirstName"].ToString()!,
+                    LastName = reader["LastName"].ToString()!,
                     TotalSpent = Convert.ToDecimal(reader["TotalSpent"])
                 });
             }
