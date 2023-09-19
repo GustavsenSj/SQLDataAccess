@@ -1,16 +1,16 @@
 USE SuperheroesDb;
 
 
-/* Inserting values into the power table */
+-- Inserting values into the power table
 INSERT INTO Power(Name, Description)
 VALUES 
 	('Super speed', 'Lets hero move at incredible speed'),
 	('Super strength', 'Lets hero display incredible feats of strength'),
 	('Spider-senses', 'Warns hero of impending danger'),
-	('Healing Factor', 'Lets hero regenerate damange and wounds at incredible speed');
+	('Healing Factor', 'Lets hero regenerate damange and wounds at incredible speed'),
 
 
-/* Inserting values to the link table between Superhero and power tables */
+-- Inserting values to the link table between Superhero and power tables 
 INSERT INTO SuperheroPowerLink (SuperheroId, PowerId)
 VALUES
 	(1,1), -- The Flash gets super speed

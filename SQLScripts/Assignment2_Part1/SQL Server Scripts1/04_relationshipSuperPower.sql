@@ -1,6 +1,6 @@
 USE SuperheroesDb;
 
-/* Creates a linking table between the Superhero and power tables */
+-- Creates a linking table between the Superhero and power tables 
 CREATE TABLE SuperheroPowerLink (
     SuperheroId int,
     PowerId int,

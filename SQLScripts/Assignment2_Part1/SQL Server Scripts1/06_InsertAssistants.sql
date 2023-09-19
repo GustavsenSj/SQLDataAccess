@@ -1,6 +1,6 @@
 USE SuperheroesDb;
 
-/* Inserting values into the Assistant table */
+-- Inserting values into the Assistant table 
 INSERT INTO Assistant ([Name], SuperheroId)
 VALUES 
     ('Kid Flash', 1),  -- Assisting Barry Allen (Flash)
