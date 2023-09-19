@@ -175,10 +175,10 @@ static void TryToUpdateCustomer(string connectionString, int id, Customer custom
 static void PrintCustomerCountByCountry(string connectionString)
 {
     DatabaseConnection dbConnection = new DatabaseConnection(connectionString);
-    var customerRepository = new CustomerRepository(dbConnection);
-    var customerService = new CustomerService(customerRepository);
+    var customerCountryRepository = new CustomerCountryRepository(dbConnection);
+    var customerCountryService = new CustomerCountryService(customerCountryRepository);
 
-    List<CustomerCountry> customerCountry = customerService.GetCustomersCountByCountry();
+    List<CustomerCountry> customerCountry = customerCountryService.GetCustomersCountByCountry();
 
     foreach (var country in customerCountry)
     {
@@ -189,11 +189,11 @@ static void PrintCustomerCountByCountry(string connectionString)
 static void PrintTopXSpendingCustomers(string connectionString, int count)
 {
     DatabaseConnection dbConnection = new DatabaseConnection(connectionString);
-    var customerRepository = new CustomerRepository(dbConnection);
-    var customerService = new CustomerService(customerRepository);
+    var customerSpenderRepository = new CustomerSpenderRepository(dbConnection);
+    var customerSpenderService = new CustomerSpenderService(customerSpenderRepository);
 
 
-    List<CustomerSpender> topSpenders = customerService.GetTopXHighestSpenders(count);
+    List<CustomerSpender> topSpenders = customerSpenderService.GetTopXHighestSpenders(count);
 
     foreach (var spender in topSpenders)
     {
@@ -205,10 +205,10 @@ static void PrintTopXSpendingCustomers(string connectionString, int count)
 static void PrintTopGenreOfCustomerWithId(string connectionString, int id)
 {
     DatabaseConnection dbConnection = new DatabaseConnection(connectionString);
-    var customerRepository = new CustomerRepository(dbConnection);
-    var customerService = new CustomerService(customerRepository);
+    var customerGenreRepository = new CustomerGenreRepository(dbConnection);
+    var customerGenreService = new CustomerGenreService(customerGenreRepository);
 
-    CustomerGenre customerGenre = customerService.GetTopGenreOfCustomerWithId(id);
+    CustomerGenre customerGenre = customerGenreService.GetTopGenreOfCustomerWithId(id);
 
     Console.WriteLine($"Name: {customerGenre.CustomerName}, Top genre: {customerGenre.GenreName}, Number of tracks: {customerGenre.TrackCount}");
 }

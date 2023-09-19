@@ -49,24 +49,9 @@ public class CustomerService
         return _customerRepository.UpdateCustomerWithId(id, customer);
     }
 
-    public List<CustomerCountry> GetCustomersCountByCountry()
-    {
-        return _customerRepository.GetCustomersCountByCountry();
-    }
+   
 
-    public List<CustomerSpender> GetTopXHighestSpenders(int count)
-    {
-        return _customerRepository.GetTopXHighestSpenders(count);
-    }
+   
 
-    public CustomerGenre GetTopGenreOfCustomerWithId(int id)
-    {
-        CustomerGenre? customerGenre = _customerRepository.GetTopGenreOfCustomerWithId(id);
-        if (customerGenre == null)
-        {
-            throw new InvalidOperationException("No tracks or customer found with Id: " + id);
-        }
-
-        return customerGenre;
-    }
+   
 }
