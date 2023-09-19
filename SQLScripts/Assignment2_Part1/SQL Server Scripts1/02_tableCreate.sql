@@ -1,6 +1,6 @@
 USE SuperheroesDb;
 
-/* Creates Superhero table*/
+-- Creates Superhero table
 CREATE TABLE Superhero (
 	Id int IDENTITY(1,1) PRIMARY KEY,
 	Name nvarchar(50) NOT NULL,
@@ -8,13 +8,13 @@ CREATE TABLE Superhero (
 	Origin nvarchar(200)
 )
 
-/* Creates Assistant table*/
+-- Creates Assistant table
 CREATE TABLE Assistant (
 	Id int IDENTITY(1,1) PRIMARY KEY,
 	Name nvarchar(50) NOT NULL,
 )
 
-/* /* Creates power table*/ */
+-- Creates power table
 CREATE TABLE power (
 	Id int IDENTITY(1,1) PRIMARY KEY,
 	Name nvarchar(50) NOT NULL,

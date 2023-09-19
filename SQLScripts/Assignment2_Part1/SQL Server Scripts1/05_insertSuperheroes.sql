@@ -1,6 +1,6 @@
 USE SuperheroesDb;
 
-/* Inserted values into the Superhero table */
+-- Inserted values into the Superhero table
 INSERT INTO Superhero ([Name], Alias, Origin)
 VALUES 
     ('Barry Allen', 'Flash', 'He was struck by a bolt of lightning that connected him with a mysterious source of power he dubbed the "Speed Force.”'),
