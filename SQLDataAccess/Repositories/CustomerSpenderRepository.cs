@@ -28,28 +28,29 @@ public class CustomerSpenderRepository
     public List<CustomerSpender> GetTopXHighestSpenders(int count)
     {
         List<CustomerSpender> customers = new List<CustomerSpender>();
-        string query =
+        using SqlConnection connection = _dbConnection.GetConnection();
+        const string query =
             @" SELECT TOP (@TopCount) C.CustomerId, C.FirstName, C.LastName, SUM(I.Total) AS TotalSpent FROM Customer C JOIN Invoice I ON C.CustomerId = I.CustomerId JOIN InvoiceLine IL ON I.InvoiceId = IL.InvoiceId GROUP BY C.CustomerId, C.FirstName, C.LastName ORDER BY TotalSpent DESC;";
-
-        using (SqlConnection connection = _dbConnection.GetConnection())
+        try
         {
-            using (SqlCommand command = new SqlCommand(query, connection))
+            using SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@TopCount", count);
+            using SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
             {
-                command.Parameters.AddWithValue("@TopCount", count);
-                using (SqlDataReader reader = command.ExecuteReader())
+                customers.Add(new CustomerSpender
                 {
-                    while (reader.Read())
-                    {
-                        customers.Add(new CustomerSpender
-                        {
-                            CustomerId = Convert.ToInt32(reader["CustomerId"]),
-                            FirstName = reader["FirstName"].ToString(),
-                            LastName = reader["LastName"].ToString(),
-                            TotalSpent = Convert.ToDecimal(reader["TotalSpent"])
-                        });
-                    }
-                }
+                    CustomerId = Convert.ToInt32(reader["CustomerId"]),
+                    FirstName = reader["FirstName"].ToString(),
+                    LastName = reader["LastName"].ToString(),
+                    TotalSpent = Convert.ToDecimal(reader["TotalSpent"])
+                });
             }
+        }
+        catch (SqlException ex)
+        {
+            Console.WriteLine($"SQL Error: {ex.Message}");
+            throw;
         }
 
         return customers;
