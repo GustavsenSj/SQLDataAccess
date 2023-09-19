@@ -8,7 +8,6 @@ VALUES
 	('Super strength', 'Lets hero display incredible feats of strength'),
 	('Spider-senses', 'Warns hero of impending danger'),
 	('Healing Factor', 'Lets hero regenerate damange and wounds at incredible speed'),
-	('Shapeshifter ', 'Lets hero metamorph');
 
 
 -- Inserting values to the link table between Superhero and power tables 
@@ -19,5 +18,4 @@ VALUES
 	(2,4), -- The Hulk gets Healing Factor
 	(3,2), -- Spider-man gets Super strength
 	(3,3), -- Spider-man gets Spider-senses
-	(3,4), -- Spider-man gets Healing Factor
-	(4,5); -- Beast Boy gets Shapeshifter
+	(3,4); -- Spider-man gets Healing Factor
