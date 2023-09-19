@@ -1,4 +1,7 @@
 ﻿namespace SQLDataAccess.Models;
+/// <summary>
+/// Represents an artist in the Chinook database.
+/// </summary>
 
 public class Artist
 {

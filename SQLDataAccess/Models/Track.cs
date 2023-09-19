@@ -1,5 +1,8 @@
 ﻿namespace SQLDataAccess.Models;
 
+/// <summary>
+/// Represents an instance of track from the Chinook database.
+/// </summary>
 public class Track
 {
    private int TrackId { get; set; } 

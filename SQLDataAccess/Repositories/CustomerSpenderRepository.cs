@@ -4,16 +4,27 @@ using SQLDataAccess.Models;
 
 namespace SQLDataAccess.Repositories;
 
+/// <summary>
+/// Provides methods to access and retrieve information about the highest spending customers from the database.
+/// </summary>
 public class CustomerSpenderRepository
 {
     private readonly DatabaseConnection _dbConnection;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CustomerSpenderRepository"/> class with the specified database connection.
+    /// </summary>
+    /// <param name="dbConnection">The database connection to be used for data retrieval.</param>
     public CustomerSpenderRepository(DatabaseConnection dbConnection)
     {
         _dbConnection = dbConnection;
     }
 
-
+    /// <summary>
+    /// Retrieves a list of the top X highest spending customers from the database.
+    /// </summary>
+    /// <param name="count">The number of highest spending customers to retrieve.</param>
+    /// <returns>A list of <see cref="CustomerSpender"/> objects representing the highest spending customers.</returns>
     public List<CustomerSpender> GetTopXHighestSpenders(int count)
     {
         List<CustomerSpender> customers = new List<CustomerSpender>();
@@ -42,4 +53,5 @@ public class CustomerSpenderRepository
         }
 
         return customers;
-    }}
+    }
+}

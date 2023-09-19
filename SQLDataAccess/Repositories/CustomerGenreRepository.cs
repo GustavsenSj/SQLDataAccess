@@ -4,15 +4,29 @@ using SQLDataAccess.Models;
 
 namespace SQLDataAccess.Repositories;
 
+/// <summary>
+/// Represents a repository for querying the top genre of a customer by their ID.
+/// </summary>
 public class CustomerGenreRepository
 {
     private readonly DatabaseConnection _dbConnection;
 
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CustomerGenreRepository"/> class with the specified database connection.
+    /// </summary>
+    /// <param name="dbConnection">The database connection to be used for data retrieval.</param>
     public CustomerGenreRepository(DatabaseConnection dbConnection)
     {
         _dbConnection = dbConnection;
     }
 
+
+    /// <summary>
+    /// Retrieves the top genre of a customer with the specified ID.
+    /// </summary>
+    /// <param name="id">The ID of the customer for whom to find the top genre.</param>
+    /// <returns>A <see cref="CustomerGenre"/> object representing the top genre of the customer. returns null if no customer is found</returns>
     public CustomerGenre GetTopGenreOfCustomerWithId(int id)
     {
         CustomerGenre customerGenre = null;

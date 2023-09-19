@@ -1,5 +1,8 @@
 ﻿namespace SQLDataAccess.Models;
 
+/// <summary>
+/// Represents an instance of a employee in the Chinook database.
+/// </summary>
 public class Employee
 {
    private int EmployeeId { get; set; } 

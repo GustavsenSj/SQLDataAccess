@@ -1,5 +1,8 @@
 ﻿namespace SQLDataAccess.Models;
 
+/// <summary>
+/// Represents an instance of invoice line from the Chinook database.
+/// </summary>
 public class InvoiceLine
 {
     private int InvoiceLineId { get; set; }

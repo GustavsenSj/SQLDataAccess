@@ -6,15 +6,27 @@ namespace SQLDataAccess.Repositories;
 
 using System.Collections.Generic;
 
+/// <summary>
+/// Provides methods to access and manipulate customer data in the database.
+/// </summary>
 public class CustomerRepository
 {
     private readonly DatabaseConnection _dbConnection;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CustomerRepository"/> class with the specified database connection.
+    /// </summary>
+    /// <param name="dbConnection">The database connection to be used for data retrieval.</param>
     public CustomerRepository(DatabaseConnection dbConnection)
     {
         _dbConnection = dbConnection;
     }
 
+
+    /// <summary>
+    /// Retrieves a list of all customers from the database.
+    /// </summary>
+    /// <returns>A list of <see cref="Customer"/> objects representing customers. List is empty if no customers is found</returns>
     public List<Customer> GetAllCustomers()
     {
         List<Customer> customers = new List<Customer>();
@@ -48,6 +60,11 @@ public class CustomerRepository
         return customers;
     }
 
+    /// <summary>
+    /// Retrieves a customer by their ID from the database.
+    /// </summary>
+    /// <param name="id">The ID of the customer to retrieve.</param>
+    /// <returns>A <see cref="Customer"/> object representing the customer with the specified ID, or null if not found.</returns>
     public Customer? GetCustomerById(int id)
     {
         Customer? foundCustomer = null;
@@ -74,7 +91,11 @@ public class CustomerRepository
         return foundCustomer;
     }
 
-
+    /// <summary>
+    /// Retrieves a list of customers whose names contain a specified search term.
+    /// </summary>
+    /// <param name="name">The search term to match against customer names.</param>
+    /// <returns>A list of <see cref="Customer"/> objects matching the search criteria.</returns>
     public List<Customer> GetAllCustomersByName(string name)
     {
         List<Customer> customers = new List<Customer>();
@@ -109,7 +130,12 @@ public class CustomerRepository
         return customers;
     }
 
-
+    /// <summary>
+    /// Retrieves a paged list of customers from the database.
+    /// </summary>
+    /// <param name="limit">The maximum number of customers to retrieve.</param>
+    /// <param name="offset">The offset for paging.</param>
+    /// <returns>A paged list of <see cref="Customer"/> objects.</returns>
     public List<Customer> GetCustomerInRange(int limit, int offset)
     {
         List<Customer> customers = new List<Customer>();
@@ -144,6 +170,12 @@ public class CustomerRepository
         return customers;
     }
 
+
+    /// <summary>
+    /// Adds a new customer to the database.
+    /// </summary>
+    /// <param name="customer">The <see cref="Customer"/> object representing the customer to be added.</param>
+    /// <returns>True if the customer was successfully added, otherwise false.</returns>
     public bool AddCustomer(Customer customer)
     {
         bool success;
@@ -169,6 +201,13 @@ public class CustomerRepository
         return success;
     }
 
+
+    /// <summary>
+    /// Updates an existing customer's information in the database.
+    /// </summary>
+    /// <param name="id">The ID of the customer to update.</param>
+    /// <param name="customer">The updated <see cref="Customer"/> object representing the customer's information.</param>
+    /// <returns>True if the customer was successfully updated, otherwise false.</returns>
     public bool UpdateCustomerWithId(int id, Customer customer)
     {
         bool success;
@@ -196,10 +235,4 @@ public class CustomerRepository
 
         return success;
     }
-
-   
-
-   
-
- 
 }

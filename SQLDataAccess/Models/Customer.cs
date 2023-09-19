@@ -1,4 +1,7 @@
 ﻿namespace SQLDataAccess.Models;
+/// <summary>
+/// Represents an customer in the Chinook database.
+/// </summary>
 
 public class Customer
 {
