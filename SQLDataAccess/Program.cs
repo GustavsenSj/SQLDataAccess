@@ -7,50 +7,50 @@ using SQLDataAccess.Service;
 // Set up connections 
 string connectionString = GetConnectionString();
 
-//call functions
-// Console.WriteLine("All customers \n----------------");
-// PrintCustomer(connectionString);
-//
-// Console.WriteLine("-----------\n Find by Id \n-------------");
-// FindAndPrintCustomerById(1, connectionString);
-//
-//
-// Console.WriteLine("-----------\n Find by Name \n-------------");
-// PrintCustomerByName(connectionString, "Bj");
-//
-//
-// Console.WriteLine("-----------\n Get with limit and offset \n-------------");
-// PrintCustomerWithOffset(connectionString, 10, 5);
-//
-//
-// Console.WriteLine("-----------\n Add customer \n-------------");
-// TryToAddCustomer(connectionString, new Customer()
-// {
-//     FirstName = "Sjur",
-//     LastName = "Gustavsen",
-//     Country = "Norway",
-//     PostalCode = "0087",
-//     Phone = "54888548",
-//     Email = "mail@CoolMail.com"
-// });
+// call functions
+ Console.WriteLine("All customers \n----------------");
+ PrintCustomer(connectionString);
 
-// Console.WriteLine("-----------\n Update customer \n-------------");
-// TryToUpdateCustomer(connectionString, 60, new Customer()
-// {
-//     FirstName = "Sjur Updated",
-//     LastName = "Gustavsen",
-//     Country = "Norway",
-//     PostalCode = "0087",
-//     Phone = "54888548",
-//     Email = "mail@CoolMail.com"
-// });
+ Console.WriteLine("-----------\n Find by Id \n-------------");
+ FindAndPrintCustomerById(1, connectionString);
 
 
-// Console.WriteLine("-----------\n Customer count by country \n-------------");
-// PrintCustomerCountByCountry(connectionString);
+ Console.WriteLine("-----------\n Find by Name \n-------------");
+ PrintCustomerByName(connectionString, "Bj");
 
-// Console.WriteLine("-----------\n Top X spending customers \n-------------");
-// PrintTopXSpendingCustomers(connectionString, 10);
+
+ Console.WriteLine("-----------\n Get with limit and offset \n-------------");
+ PrintCustomerWithOffset(connectionString, 10, 5);
+
+
+ Console.WriteLine("-----------\n Add customer \n-------------");
+ TryToAddCustomer(connectionString, new Customer()
+ {
+     FirstName = "Sjur",
+     LastName = "Gustavsen",
+     Country = "Norway",
+     PostalCode = "0087",
+     Phone = "54888548",
+     Email = "mail@CoolMail.com"
+ });
+
+ Console.WriteLine("-----------\n Update customer \n-------------");
+ TryToUpdateCustomer(connectionString, 60, new Customer()
+ {
+     FirstName = "Sjur Updated",
+     LastName = "Gustavsen",
+     Country = "Norway",
+     PostalCode = "0087",
+     Phone = "54888548",
+     Email = "mail@CoolMail.com"
+ });
+
+
+ Console.WriteLine("-----------\n Customer count by country \n-------------");
+ PrintCustomerCountByCountry(connectionString);
+
+ Console.WriteLine("-----------\n Top X spending customers \n-------------");
+ PrintTopXSpendingCustomers(connectionString, 10);
 
 
 Console.WriteLine("-----------\n Top Genre of customers \n-------------");
