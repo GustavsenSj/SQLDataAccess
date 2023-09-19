@@ -44,3 +44,12 @@ The project is structured in the following way:
 - `SQL` - SQL scripts used to create the database used in the application
 
 ### SQL scripts
+- `01_dbCreate.sql` - Creates a database called "SuperheroesDb"
+- `02_tableCreate.sql` - Creates tables for Superhero, Assistant and Power
+- `03_relationshipSuperheroAssistant.sql` - Alters Assistant table to create constraints and foreign key
+- `04_relationshipSuperheroPow.sql` - Creates a linking table between Superhero and Power
+- `05_insertSuperheroes.sql` - Inserts three superheroes into the database
+- `06_insertAssistants.sql` - Inserts three assistants and assign them a superhero to assist
+- `07_powers.sql` - Inserts four powers and assign powers to superheroes
+- `08_updateSuperhero.sql` - Updates a superhero name  
+- `09_deleteAssistant.sql` - Deletes an assistant
