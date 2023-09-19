@@ -1,4 +1,5 @@
-﻿using SQLDataAccess.Models;
+﻿using SQLDataAccess.Exception;
+using SQLDataAccess.Models;
 using SQLDataAccess.Repositories;
 
 namespace SQLDataAccess.Service;
@@ -14,6 +15,14 @@ public class CustomerCountryService
 
     public List<CustomerCountry> GetCustomersCountByCountry()
     {
-        return _customerCountryRepository.GetCustomersCountByCountry();
+        try
+        {
+            return _customerCountryRepository.GetCustomersCountByCountry();
+        }
+        catch (System.Exception ex)
+        {
+            throw new DataServiceException(
+                "An error occurred while retrieving customer data: " + ex.Message);
+        }
     }
 }

@@ -14,12 +14,20 @@ public class DatabaseConnection : IDisposable
 
     public SqlConnection GetConnection()
     {
-        if (_connection.State == ConnectionState.Closed)
+        try
         {
-            _connection.Open();
-        }
+            if (_connection.State == ConnectionState.Closed)
+            {
+                _connection.Open();
+            }
 
-        return _connection;
+            return _connection;
+        }
+        catch (SqlException ex)
+        {
+            Console.WriteLine($"Database connection error: {ex.Message}");
+            throw;
+        }
     }
 
     public void Dispose()

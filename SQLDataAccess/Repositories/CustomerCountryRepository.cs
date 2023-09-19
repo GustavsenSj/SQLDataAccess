@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Identity.Client;
 using SQLDataAccess.DB;
 using SQLDataAccess.Models;
 
@@ -16,6 +17,7 @@ public class CustomerCountryRepository
     public List<CustomerCountry> GetCustomersCountByCountry()
     {
         List<CustomerCountry> customerCountry = new List<CustomerCountry>();
+
         using (SqlConnection connection = _dbConnection.GetConnection())
         {
             string query =
@@ -35,7 +37,7 @@ public class CustomerCountryRepository
                 }
             }
         }
-    
+
         return customerCountry;
     }
 }
