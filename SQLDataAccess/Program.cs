@@ -23,16 +23,16 @@ string connectionString = GetConnectionString();
  PrintCustomerWithOffset(connectionString, 10, 5);
 
 
- // Console.WriteLine("-----------\n Add customer \n-------------");
- // TryToAddCustomer(connectionString, new Customer()
- // {
- //     FirstName = "Sjur",
- //     LastName = "Gustavsen",
- //     Country = "Norway",
- //     PostalCode = "0087",
- //     Phone = "54888548",
- //     Email = "mail@CoolMail.com"
- // });
+ Console.WriteLine("-----------\n Add customer \n-------------");
+ TryToAddCustomer(connectionString, new Customer()
+ {
+      FirstName = "Sjur",
+      LastName = "Gustavsen",
+      Country = "Norway",
+      PostalCode = "0087",
+      Phone = "54888548",
+      Email = "mail@CoolMail.com"
+  });
 
  Console.WriteLine("-----------\n Update customer \n-------------");
  TryToUpdateCustomer(connectionString, 60, new Customer()
